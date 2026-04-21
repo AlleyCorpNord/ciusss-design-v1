@@ -1,0 +1,223 @@
+import type { SourcesPlacement } from "./prototype-config"
+
+export type ChatLocale = "fr" | "en"
+
+export interface SuggestionDef {
+  id: string
+  label: string
+}
+
+export interface SourceLinkDef {
+  title: string
+  url: string
+}
+
+export interface ChatCopy {
+  greeting: { line1: string; line2: string; disclaimer: string }
+  userServicesQuestion: string
+  assistantFirst: {
+    intro: string
+    bullets: string[]
+  }
+  sourcesHeading: string
+  sourcesInline: SourceLinkDef[]
+  /** Short label for the collapsible sources trigger (count appended in UI). */
+  sourcesCollapsibleLabel: string
+  v3: { intro: string; links: SourceLinkDef[] }
+  /** V4: inline sources as a sentence around the same URLs as `v3.links`. */
+  v4: {
+    servicesSourcesBeforeFirstLink: string
+    servicesSourcesBetweenLinks: string
+    servicesSourcesAfterLastLink: string
+  }
+  assistantFollowUp: string
+  initialSuggestions: SuggestionDef[]
+  followUpSuggestions: SuggestionDef[]
+  composerPlaceholder: string
+  composerSendLabel: string
+  composerMicAriaLabel: string
+  composerTranscriptionLoadingPlaceholder: string
+  voiceRecordingCancelAriaLabel: string
+  voiceRecordingConfirmAriaLabel: string
+  typingIndicatorAriaLabel: string
+  closeAriaLabel: string
+}
+
+const fr: ChatCopy = {
+  greeting: {
+    line1: "Bonjour ! 👋 Je suis votre **Assistant CIUSSS**.",
+    line2:
+      "Comment puis-je vous aider aujourd'hui ? Vous pouvez me poser des questions sur nos **services**, nos **cliniques**, et bien plus.",
+    disclaimer:
+      "⚠️ Cependant je ne suis pas en mesure de fournir des recommandations médicales et je ne pourrai pas prendre rendez-vous automatiquement pour vous.",
+  },
+  userServicesQuestion: "Quels services offrez-vous ?",
+  assistantFirst: {
+    intro:
+      "Nous offrons un **continuum complet de soins de santé et de services sociaux** à la population du territoire, au sein de plus de **30 installations**. Voici les principaux types de services mentionnés sur le site :",
+    bullets: [
+      "**Hôpital général** : notamment l'Hôpital général juif",
+      "**Hôpitaux spécialisés** : 3 établissements spécialisés",
+      "**CLSC** : 5 CLSC et 1 point de service",
+      "**Centres de réadaptation** : 2 centres",
+      "**CHSLD / hébergement de longue durée** : 6 centres",
+      "**Centres de jour** : 2 centres",
+      "**Maisons bleues**",
+      "**Maison de naissance**",
+      "**Ressources intermédiaires**",
+      "**Info-Santé / Info-Social 811**",
+      "**Recherche et enseignement** : plusieurs centres de recherche affiliés",
+    ],
+  },
+  sourcesHeading: "Sources :",
+  sourcesCollapsibleLabel: "Sources",
+  sourcesInline: [
+    { title: "Page d'accueil du CIUSSS", url: "#" },
+    { title: "Programmes et services", url: "#" },
+  ],
+  v4: {
+    servicesSourcesBeforeFirstLink:
+      "Vous pouvez explorer la liste complète des programmes et services sur ",
+    servicesSourcesBetweenLinks: " et ",
+    servicesSourcesAfterLastLink: ".",
+  },
+  v3: {
+    intro:
+      "Vous pouvez aussi explorer les sections de services et d'installations ici :",
+    links: [
+      {
+        title: "Page d'accueil du CIUSSS",
+        url: "https://www.ciussscentreouest.ca/",
+      },
+      {
+        title: "Notre CIUSSS",
+        url: "https://www.ciussscentreouest.ca/a-propos-du-ciusss/notre-ciusss",
+      },
+    ],
+  },
+  assistantFollowUp:
+    "Si vous voulez, je peux aussi vous donner la **liste détaillée des services par catégorie** ou les **adresses de chaque point de service**.",
+  initialSuggestions: [
+    { id: "services", label: "Quels services offrez-vous ?" },
+    { id: "appointment", label: "Comment prendre rendez-vous ?" },
+    { id: "clinics", label: "Où sont situées vos cliniques ?" },
+  ],
+  followUpSuggestions: [
+    { id: "detail_list", label: "Liste détaillée des services par catégorie" },
+    { id: "addresses", label: "Adresses de chaque point de service" },
+  ],
+  composerPlaceholder: "Posez votre question...",
+  composerSendLabel: "Envoyer",
+  composerMicAriaLabel: "Enregistrer un message vocal",
+  composerTranscriptionLoadingPlaceholder: "Transcription en cours…",
+  voiceRecordingCancelAriaLabel: "Annuler l'enregistrement",
+  voiceRecordingConfirmAriaLabel: "Confirmer la dictée",
+  typingIndicatorAriaLabel: "En cours de réflexion",
+  closeAriaLabel: "Fermer",
+}
+
+const en: ChatCopy = {
+  greeting: {
+    line1: "Hello! 👋 I'm your **CIUSSS Assistant**.",
+    line2:
+      "How can I help you today? You can ask me about our **services**, **clinics**, and more.",
+    disclaimer:
+      "⚠️ However, I cannot provide medical advice and I cannot book appointments for you automatically.",
+  },
+  userServicesQuestion: "What services do you offer?",
+  assistantFirst: {
+    intro:
+      "We offer a **full continuum of health and social services** for people across the territory, in more than **30 facilities**. Here are the main types of services mentioned on the site:",
+    bullets: [
+      "**General hospital**: including the Jewish General Hospital",
+      "**Specialized hospitals**: 3 specialized facilities",
+      "**CLSC**: 5 CLSCs and 1 service point",
+      "**Rehabilitation centres**: 2 centres",
+      "**CHSLD / long-term care**: 6 centres",
+      "**Day centres**: 2 centres",
+      "**Maisons bleues**",
+      "**Birth centre**",
+      "**Intermediate resources**",
+      "**Info-Santé / Info-Social 811**",
+      "**Research and teaching**: several affiliated research centres",
+    ],
+  },
+  sourcesHeading: "Sources:",
+  sourcesCollapsibleLabel: "Sources",
+  sourcesInline: [
+    { title: "CIUSSS home page", url: "#" },
+    { title: "Programs and services", url: "#" },
+  ],
+  v4: {
+    servicesSourcesBeforeFirstLink:
+      "You can explore the full list of programs and services at ",
+    servicesSourcesBetweenLinks: " and ",
+    servicesSourcesAfterLastLink: ".",
+  },
+  v3: {
+    intro:
+      "You can also explore services and facility sections here:",
+    links: [
+      {
+        title: "CIUSSS home page",
+        url: "https://www.ciussscentreouest.ca/",
+      },
+      {
+        title: "Our CIUSSS",
+        url: "https://www.ciussscentreouest.ca/a-propos-du-ciusss/notre-ciusss",
+      },
+    ],
+  },
+  assistantFollowUp:
+    "If you'd like, I can also share a **detailed list of services by category** or the **address of each service point**.",
+  initialSuggestions: [
+    { id: "services", label: "What services do you offer?" },
+    { id: "appointment", label: "How do I book an appointment?" },
+    { id: "clinics", label: "Where are your clinics located?" },
+  ],
+  followUpSuggestions: [
+    { id: "detail_list", label: "Detailed list of services by category" },
+    { id: "addresses", label: "Address of each service point" },
+  ],
+  composerPlaceholder: "Ask your question...",
+  composerSendLabel: "Send",
+  composerMicAriaLabel: "Record a voice message",
+  composerTranscriptionLoadingPlaceholder: "Transcription in progress…",
+  voiceRecordingCancelAriaLabel: "Cancel recording",
+  voiceRecordingConfirmAriaLabel: "Confirm dictation",
+  typingIndicatorAriaLabel: "Thinking",
+  closeAriaLabel: "Close",
+}
+
+export function getChatCopy(locale: ChatLocale): ChatCopy {
+  return locale === "en" ? en : fr
+}
+
+/** Plain text for progressive streaming (intro + bullets only; sources are rendered as UI). */
+export function getAssistantFirstPlainText(
+  copy: ChatCopy,
+  _placement: SourcesPlacement
+): string {
+  const lines: string[] = [copy.assistantFirst.intro]
+  for (const b of copy.assistantFirst.bullets) {
+    lines.push(`• ${b}`)
+  }
+  return lines.join("\n")
+}
+
+export function getV3PlainText(copy: ChatCopy): string {
+  const lines = [copy.v3.intro]
+  for (const link of copy.v3.links) {
+    lines.push(`• ${link.title}`)
+  }
+  return lines.join("\n")
+}
+
+export function getAssistantSecondPlainText(copy: ChatCopy): string {
+  return copy.assistantFollowUp
+}
+
+export function splitProgressiveChunks(fullText: string): string[] {
+  if (!fullText) return []
+  return fullText.split("\n")
+}
